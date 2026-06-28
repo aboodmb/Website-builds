@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Engineering — مركز تعليمي | عمّان، الأردن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #0A1628;
+      --navy2: #122040;
+      --gold:  #C9963A;
+      --gold2: #E8B84B;
+      --white: #FFFFFF;
+      --sand:  #F5EFE4;
+      --slate: #4A5568;
+      --light: #8898AA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* offset anchor targets so fixed nav doesn't cover them */
+    #courses, #contact, #about, #why {
+      scroll-margin-top: 80px;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(10,22,40,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,150,58,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      direction: ltr;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-direction: row-reverse;
+    }
+    .nav-links a {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--navy);
+      overflow: hidden;
+      padding: 0 5vw;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -5%;
+      width: 55%;
+      height: 130%;
+      background: linear-gradient(135deg, rgba(201,150,58,0.08) 0%, rgba(232,184,75,0.15) 50%, rgba(201,150,58,0.05) 100%);
+      transform: skewX(8deg);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,150,58,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,150,58,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: right;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+      direction: ltr;
+    }
+    .hero-eyebrow::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 2.8rem;
+      max-width: 520px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Stats bar */
+    .hero-stats {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      border-top: 1px solid rgba(201,150,58,0.15);
+    }
+    .stat {
+      flex: 1;
+      padding: 1.4rem 3vw;
+      border-left: 1px solid rgba(201,150,58,0.1);
+      text-align: center;
+    }
+    .stat:last-child { border-left: none; }
+    .stat-num {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 90px;
+      left: 5vw;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.7rem;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(201,150,58,0.7), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.6); opacity: 0.4; }
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 100px 5vw; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--slate);
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Course cards */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: #E2D9CB;
+      border: 1.5px solid #E2D9CB;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .course-card {
+      background: var(--white);
+      padding: 2.5rem;
+      transition: background 0.25s;
+    }
+    .course-card:hover { background: var(--sand); }
+
+    .course-icon {
+      font-size: 2rem;
+      margin-bottom: 1.4rem;
+      display: block;
+    }
+
+    .course-lang {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .course-name {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.9rem;
+      line-height: 1.35;
+    }
+
+    .course-desc {
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--slate);
+      margin-bottom: 1.6rem;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: flex-end;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      background: rgba(201,150,58,0.1);
+      border: 1px solid rgba(201,150,58,0.2);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 100px;
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      background: var(--navy);
+      padding: 100px 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::after {
+      content: 'BE';
+      position: absolute;
+      left: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 22rem;
+      font-weight: 700;
+      color: rgba(201,150,58,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .about-content { position: relative; z-index: 2; }
+    .about-content .section-title { color: var(--white); }
+    .about-content .section-sub { color: rgba(255,255,255,0.55); }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      flex-direction: row-reverse;
+    }
+
+    .feature-dot {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .feature-text span {
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .about-visual { position: relative; z-index: 2; }
+
+    .location-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,150,58,0.2);
+      border-radius: 4px;
+      padding: 2.2rem;
+    }
+
+    .location-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .location-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+      flex-direction: row-reverse;
+    }
+    .location-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .location-text {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      text-align: right;
+    }
+    .location-text strong {
+      display: block;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .location-text .ltr { direction: ltr; display: inline-block; }
+
+    .map-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.75rem 1.6rem;
+      border: 1px solid rgba(201,150,58,0.5);
+      color: var(--gold);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .map-btn:hover { background: var(--gold); color: var(--navy); }
+
+    /* Phone button */
+    .phone-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+      padding: 0.75rem 1.6rem;
+      background: rgba(201,150,58,0.12);
+      border: 1px solid rgba(201,150,58,0.4);
+      color: var(--gold2);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 2px;
+      direction: ltr;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .phone-btn:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── WHY ── */
+    .why-section {
+      background: var(--sand);
+      padding: 100px 5vw;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: rgba(201,150,58,0.18);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .why-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.7rem;
+    }
+
+    .why-text {
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--slate);
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 100px 5vw;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .contact-inner { max-width: 680px; margin: 0 auto; }
+
+    .contact-section .section-label { justify-content: center; }
+    .contact-section .section-label::after { display: none; }
+    .contact-section .section-title { text-align: center; }
+
+    .contact-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--slate);
+      margin: 0.8rem auto 2rem;
+      max-width: 460px;
+    }
+
+    .contact-phone-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      direction: ltr;
+      margin-bottom: 1.8rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .contact-phone-big:hover { background: var(--navy2); transform: translateY(-2px); }
+    .contact-phone-big .phone-icon { font-size: 1.3rem; }
+
+    .contact-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(201,150,58,0.15);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      direction: ltr;
+    }
+    .footer-logo span { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-location {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * { animation: fadeUp 0.7s ease both; }
+    .hero-eyebrow  { animation-delay: 0.1s; }
+    .hero h1       { animation-delay: 0.25s; }
+    .hero-sub      { animation-delay: 0.4s; }
+    .hero-cta      { animation-delay: 0.55s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-section { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { display: none; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-content > * { animation: none; }
+      .scroll-line { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Business <span>Engineering</span></a>
+  <ul class="nav-links">
+    <li><a href="#courses">البرامج</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#why">لماذا نحن</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-eyebrow">مركز تعليمي · عمّان، الأردن</div>
+    <h1>افتح أبوابك نحو <em>العالم</em></h1>
+    <p class="hero-sub">
+      برامج لغوية ودورات مهنية مصمَّمة لتأخذك إلى آفاق جديدة. تحضير IELTS، اللغة الألمانية، الإسبانية، وتخصصات المنظمات الدولية — كل ذلك تحت سقف واحد في مجمع الملك الحسين للأعمال.
+    </p>
+    <div class="hero-cta">
+      <button onclick="scrollToSection('courses')" class="btn-primary">استكشف البرامج</button>
+      <button onclick="scrollToSection('contact')" class="btn-ghost">تواصل معنا</button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    تمرير
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">2020</div>
+      <div class="stat-label">تأسيس المركز</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">برامج متخصصة</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">KHBP</div>
+      <div class="stat-label">الموقع</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">لغات تُدرَّس</div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="section" id="courses">
+  <div class="section-label">برامجنا التعليمية</div>
+  <h2 class="section-title">كلُّ دورة بوابةٌ إلى أفق جديد</h2>
+  <p class="section-sub">من اختبارات اللغة المعترف بها دولياً إلى المسارات المهنية المتخصصة — نزوّدك بمهارات تفتح لك الأبواب في كل مكان.</p>
+
+  <div class="courses-grid">
+
+    <div class="course-card">
+      <span class="course-icon">🎓</span>
+      <div class="course-lang">English · International</div>
+      <div class="course-name">تحضير اختبار IELTS</div>
+      <p class="course-desc">تحضير مكثف ومنظَّم لاختبار اللغة الإنجليزية الدولي. استهدف درجتك المطلوبة من خلال إرشاد متخصص، واختبارات محاكاة موقوتة، وتغذية راجعة شخصية في المهارات الأربع جميعها.</p>
+      <div class="course-tags">
+        <span class="tag">القراءة</span>
+        <span class="tag">الكتابة</span>
+        <span class="tag">الاستماع</span>
+        <span class="tag">التحدث</span>
+        <span class="tag">اختبارات محاكاة</span>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🇩🇪</span>
+      <div class="course-lang">German · A1 – C1</div>
+      <div class="course-name">برنامج اللغة الألمانية</div>
+      <p class="course-desc">من أساسيات المبتدئين إلى الإتقان التام، تسير دوراتنا الألمانية وفق الإطار الأوروبي المشترك CEFR. مثالية لمن يسعى إلى الدراسة أو العمل أو الانتقال إلى ألمانيا أو النمسا أو سويسرا.</p>
+      <div class="course-tags">
+        <span class="tag">جميع المستويات</span>
+        <span class="tag">معيار CEFR</span>
+        <span class="tag">الدراسة في الخارج</span>
+        <span class="tag">تأشيرة العمل</span>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🇪🇸</span>
+      <div class="course-lang">Spanish · A1 – B2</div>
+      <div class="course-name">برنامج اللغة الإسبانية</div>
+      <p class="course-desc">منهج تفاعلي يغطي الإسبانية المحادثاتية والكتابية الرسمية. افتح آفاقاً واسعة في أمريكا اللاتينية وإسبانيا والمنظمات الدولية التي تتطلب هذه اللغة.</p>
+      <div class="course-tags">
+        <span class="tag">المحادثة</span>
+        <span class="tag">المهارات الكتابية</span>
+        <span class="tag">تحضير DELE</span>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🌍</span>
+      <div class="course-lang">Professional · Development</div>
+      <div class="course-name">قطاع المنظمات غير الحكومية</div>
+      <p class="course-desc">تدريب متخصص للعاملين في قطاع المنظمات الدولية والتنمية — يشمل كتابة المقترحات، وإدارة المشاريع، واللغة الإنجليزية الإنسانية، ومهارات إعداد التقارير.</p>
+      <div class="course-tags">
+        <span class="tag">كتابة المقترحات</span>
+        <span class="tag">إدارة المشاريع</span>
+        <span class="tag">اللغة الإنسانية</span>
+        <span class="tag">التقارير</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-content">
+    <div class="section-label" style="color:var(--gold)">من نحن</div>
+    <h2 class="section-title" style="color:var(--white)">مبنيٌّ للطموح،<br/><em style="color:var(--gold);">راسخٌ في عمّان</em></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.5);margin-bottom:2.5rem;">
+      تأسَّس مركز Business Engineering عام 2020 في قلب مجمع الملك الحسين للأعمال. نحمل إلى الأردن تدريباً لغوياً ومهنياً على المستوى الدولي، وفق منهجية تجمع بين الصرامة الأكاديمية والتطبيق العملي والاهتمام الشخصي بكل متعلم.
+    </p>
+    <div class="about-features">
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text">
+          <strong>مدرّسون متخصصون</strong>
+          <span>معلمون معتمدون وناطقون أصليون بالغو الخبرة في مجالاتهم.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text">
+          <strong>مجموعات صغيرة</strong>
+          <span>اهتمام شخصي بكل طالب ليتقدم وفق مساره الخاص ووتيرته الخاصة.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text">
+          <strong>بيئة احترافية</strong>
+          <span>في أرقى مجمع أعمال بالأردن — بيئة ترفع سقف طموحاتك من اليوم الأول.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text">
+          <strong>جداول مرنة</strong>
+          <span>حصص صباحية ومسائية وعطلة نهاية الأسبوع تناسب الطلاب والمهنيين العاملين.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-visual">
+    <div class="location-card">
+      <div class="location-title">📌 موقعنا وبيانات التواصل</div>
+
+      <div class="location-line">
+        <div class="location-icon">📍</div>
+        <div class="location-text">
+          <strong>العنوان</strong>
+          <span class="ltr">King Hussein Business Park<br/>Building #7, VBC Office #111<br/>King Abdullah II St., Amman 11814</span>
+        </div>
+      </div>
+
+      <div class="location-line">
+        <div class="location-icon">🕐</div>
+        <div class="location-text">
+          <strong>أوقات العمل</strong>
+          الأحد – الخميس: 8:00 صباحاً – 6:00 مساءً<br/>
+          السبت: 9:00 صباحاً – 2:00 ظهراً
+        </div>
+      </div>
+
+      <div class="location-line">
+        <div class="location-icon">🚗</div>
+        <div class="location-text">
+          <strong>كيف تصلنا</strong>
+          30 دقيقة من مطار الملكة علياء الدولي، بجانب مدينة الملك الحسين الطبية.
+        </div>
+      </div>
+
+      <a href="tel:+962791159675" class="phone-btn">📞 07 9115 9675</a>
+      <a href="https://maps.app.goo.gl/SrGUgMh6Axc4F82t8" target="_blank" class="map-btn">افتح على خرائط Google ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div class="section-label">لماذا Business Engineering</div>
+  <h2 class="section-title">التميُّز يكمن<br/>في التفاصيل</h2>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-title">تعليم يقوده الهدف</div>
+      <p class="why-text">كل درس مصمَّم حول نتيجة قابلة للقياس — سواء أكانت درجة اختبار أم تأشيرة أم خطوة في مسيرتك المهنية. ندرّسك لتحقيق هدفك، لا وفق منهج عام.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-title">عنوان مرموق</div>
+      <p class="why-text">مجمع الملك الحسين للأعمال يضم كبرى الشركات والمؤسسات في الأردن. الدراسة هنا تضعك في البيئة المناسبة لتفكير أكبر وطموح أوسع.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-title">مجتمع من المتعلمين</div>
+      <p class="why-text">طلابنا مهنيون وخرّيجون وشباب يحلمون بالعالمية. الشبكة التي تبنيها هنا قد تكون بقيمة الشهادة التي تحصل عليها.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">سجّل الآن</div>
+    <h2 class="section-title">هل أنت مستعدٌّ<br/>للخطوة الأولى؟</h2>
+    <p class="contact-sub">
+      تواصل معنا لمعرفة مواعيد الدفعات القادمة وجداول الدورات والأسعار الجماعية. فريقنا يردّ خلال 24 ساعة.
+    </p>
+    <a href="tel:+962791159675" class="contact-phone-big">
+      <span class="phone-icon">📞</span>
+      07 9115 9675
+    </a>
+    <div class="contact-actions">
+      <a href="https://maps.app.goo.gl/SrGUgMh6Axc4F82t8" target="_blank" class="btn-primary">زيارتنا على الخريطة</a>
+      <a href="https://www.instagram.com/businessengineering_/" target="_blank" class="btn-ghost">تابعنا على إنستغرام</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Business <span>Engineering</span></div>
+  <div class="footer-location">مجمع الملك الحسين للأعمال · عمّان، الأردن</div>
+  <div class="footer-copy">© 2025 Business Engineering. جميع الحقوق محفوظة.</div>
+</footer>
+
+<script>
+  function scrollToSection(id) {
+    var target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Smooth scroll for nav anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      var target = document.querySelector(targetId);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
