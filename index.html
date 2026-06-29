@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QM Engineering</title>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b0f1a;
+    color: white;
+}
+
+/* NAV - CENTERED */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(10,15,25,0.75);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* HERO IMAGE */
+.hero {
+    height: 100vh;
+    background: url('/mnt/data/1782751712010.jpeg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px;
+    width: 250px;
+    border-radius: 12px;
+}
+
+/* CONTACT */
+.contact {
+    background: #0f172a;
+}
+
+/* BUTTON */
+.call-btn {
+    background: #22c55e;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* MAP */
+.map-container {
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV (CENTERED) -->
+<nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#location">Location</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>QM Engineering</h1>
+        <p>MEP Engineering Design & Consulting in Jordan</p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+    <h2>About Us</h2>
+    <p>
+        QM Engineering provides professional Mechanical, Electrical, and Plumbing (MEP)
+        design services for residential and commercial projects in Jordan.
+    </p>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <h2>Our Services</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Electrical</h3>
+            <p>Power systems, lighting, fire alarms.</p>
+        </div>
+
+        <div class="card">
+            <h3>Mechanical</h3>
+            <p>HVAC, ventilation, energy systems.</p>
+        </div>
+
+        <div class="card">
+            <h3>Plumbing</h3>
+            <p>Water supply and drainage systems.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LOCATION (GOOGLE MAPS) -->
+<section id="location">
+    <h2>Our Location</h2>
+
+    <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps?q=QM%20Engineering%20Jordan&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Call us directly for engineering consultations</p>
+
+    <button class="call-btn" onclick="callNow()">
+        📞 Call 07 9919 1011
+    </button>
+</section>
+
+<script>
+function callNow() {
+    window.location.href = "tel:+962799191011";
+}
+</script>
+
+</body>
+</html>
