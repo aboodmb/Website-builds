@@ -17,7 +17,7 @@ body {
     color: white;
 }
 
-/* NAV - CENTERED */
+/* NAV */
 nav {
     position: fixed;
     top: 0;
@@ -42,41 +42,45 @@ nav a:hover {
     color: #38bdf8;
 }
 
-/* HERO IMAGE */
+/* HERO */
 .hero {
     height: 100vh;
-    background: url('/mnt/data/1782751712010.jpeg') center/cover no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     text-align: center;
+    overflow: hidden;
+    background: #0b0f1a;
 }
 
-.hero::after {
+/* animated canvas behind content */
+#particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* dark overlay to keep readability */
+.hero::before {
     content: "";
     position: absolute;
-    inset: -50%;
-    background: radial-gradient(circle at 30% 30%, rgba(56,189,248,0.25), transparent 40%),
-                radial-gradient(circle at 70% 60%, rgba(34,197,94,0.18), transparent 45%),
-                radial-gradient(circle at 50% 80%, rgba(147,51,234,0.15), transparent 40%);
-    animation: floatGlow 12s ease-in-out infinite alternate;
-    filter: blur(40px);
+    inset: 0;
+    background: rgba(0,0,0,0.55);
     z-index: 1;
-    pointer-events: none;
 }
 
-@keyframes floatGlow {
-    0% {
-        transform: translate(-2%, -2%) scale(1);
-    }
-    100% {
-        transform: translate(2%, 2%) scale(1.1);
-    }
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
     font-size: 50px;
+    margin: 0;
 }
 
 /* SECTIONS */
@@ -132,7 +136,6 @@ section {
 
 <body>
 
-<!-- NAV (CENTERED) -->
 <nav>
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -142,13 +145,14 @@ section {
 
 <!-- HERO -->
 <div class="hero">
+    <canvas id="particles"></canvas>
+
     <div class="hero-content">
         <h1>QM Engineering</h1>
         <p>MEP Engineering Design & Consulting in Jordan</p>
     </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
     <h2>About Us</h2>
     <p>
@@ -157,7 +161,6 @@ section {
     </p>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
     <h2>Our Services</h2>
 
@@ -179,7 +182,6 @@ section {
     </div>
 </section>
 
-<!-- LOCATION (GOOGLE MAPS) -->
 <section id="location">
     <h2>Our Location</h2>
 
@@ -195,7 +197,6 @@ section {
     </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p>Call us directly for engineering consultations</p>
@@ -209,6 +210,52 @@ section {
 function callNow() {
     window.location.href = "tel:+962799191011";
 }
+
+/* ===== PARTICLE ANIMATION ===== */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 60; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6
+    });
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "rgba(56, 189, 248, 0.6)";
+
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
 </script>
 
 </body>
